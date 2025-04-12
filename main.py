@@ -242,7 +242,7 @@ while is_running:
                 reward = init_reward + bonus
         if gold_rush:
              gr_bonus = init_reward * 1.50
-             reward + gr_bonus
+             reward = reward + gr_bonus
         print(f"🦜 Your estimated earning from completing a {status} at Grade {emi} {company} is {reward:.0f} gold!💰")
         is_running = False
 
