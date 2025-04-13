@@ -2,6 +2,8 @@ import random
 import math
 import datetime
 
+from gi.overrides.keysyms import value #this was added while I was on linux for some reason XD
+
 treasure = {'Treasure Chests': 385, 'Castaway’s Chest': 95, 'Seafarer’s Chest': 200, 'Marauder’s Chest': 400, 'Captain’s Chest': 830, "Coral Castaway's Chest": 166.5,
             "Coral Seafarer's Chest": 350, "Coral Marauder's Chest": 700, "Coral Captain's Chest": 1452.5, "Ashen Castaway's Chest": 200, "Ashen Seafarer's Chest": 400, "Ashen Marauder's Chest": 830,
             "Ashen Captain's Chest": 1600, 'Chest of the Damned': 1080, 'Skeleton Captain’s Chest': 1350, 'Stronghold Chest': 2250, 'Chest of Ancient Tributes': 3650,
@@ -40,6 +42,7 @@ gold_rush = False
 if 21 <= current_hour <= 22 or 13 <= current_hour <= 16:
     gold_rush = True
 
+lower_treasure = {k.casefold(): v for k, v in treasure.items()}
 
    # elif status == "Bounty":
   #      reward = treasure["Skull"] + treasure["Gem"]
@@ -90,26 +93,41 @@ while is_running:
     print("🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️ SALTY FUNG'S WEALTH ABACUS  🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️\n")
     print("Welcome to the Salty Fungs Wealth Abacus. For all intents and purposes")
     print('it is assumed you are sailing as a Guild Emissary, and a list of available')
-    print('voyages can be accessed using !help at any time.\nIt is also assumed you are completing the highest rank voyage.\n')
+    print('voyages can be accessed using !help at any time.\nIt is also assumed you are completing the highest rank voyage.\nTo access a complete list of treasure, please use !loot.\n')
     if gold_rush:
         print("💰🔱💰🔱💰🔱 IT'S GOLD RUSH TIME 🔱💰🔱💰🔱💰")
-    status = input("What quest would you like to do? (X to quit): ").capitalize()
+    status = input("What quest would you like to do? (X to quit): ").casefold()
 
+
+    if status in lower_treasure:
+        print(status, f"{lower_treasure[status]}")
     if status == "!help":
         print(quests)
+    elif status == "!loot":
+        print(treasure)
+
+
 
     if status == "X":
         print("SALTY FUNGS ONLY!")
         is_running = False
         break
-    if status not in quests:
-        while status not in quests:
+
+    if status not in quests or status not in lower_treasure:
+        while status not in quests or status not in lower_treasure:
             print("Try again, fumb duck.")
-            status = input("What quest would you like to do? (X to quit): ").capitalize()
+            status = input("What quest would you like to do? (X to quit): ").casefold()
             if status == "X":
                 print("SALTY FUNGS ONLY!")
                 is_running = False
                 break
+            if status in lower_treasure:
+                print(status, f"{lower_treasure[status]}")
+            if status == "!help":
+                print(quests)
+            elif status == "!loot":
+                print(treasure)
+
 
     company = 'Guild'
    # company = input("What company are you sailing for?: ").capitalize()
