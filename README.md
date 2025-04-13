@@ -2,7 +2,7 @@ sea of thieves loot calculator
 beta 1.1
 
 would like to add:
-- single item value output
+- single item value output - being worked on in singleloot-broken branch (because it, and now the program, is broken)
 - add voyages for stacking output
 - finding best voyage bang for buck based on time
 - add gold rush multiplier to other quests
