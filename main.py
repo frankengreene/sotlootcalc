@@ -29,6 +29,7 @@ emissary_bonus = {"1": 0, "2": .33, "3": .67, "4": 1.00, "5": 1.50 }
 
 quests = ["Fof", "Capmap", "Skelly bounty", "Athena fort"]
 
+
 companies = ["Reaper's Bones", "Athena's Fortune", "Hunter's Call", "Order of Souls", "Merchant Alliance", "Gold Hoarders", "Guild"]
 
 reward = 0
@@ -96,7 +97,7 @@ while is_running:
     print('voyages can be accessed using !help at any time.\nIt is also assumed you are completing the highest rank voyage.\nTo access a complete list of treasure, please use !loot.\n')
     if gold_rush:
         print("💰🔱💰🔱💰🔱 IT'S GOLD RUSH TIME 🔱💰🔱💰🔱💰")
-    status = input("What quest would you like to do? (X to quit): ").casefold()
+    status = str(input("What quest would you like to do? (X to quit): ")).capitalize()
 
 
     if status in lower_treasure:
@@ -113,10 +114,9 @@ while is_running:
         is_running = False
         break
 
-    if status not in quests or status not in lower_treasure:
-        while status not in quests or status not in lower_treasure:
+    if status not in quests and status not in lower_treasure:
             print("Try again, fumb duck.")
-            status = input("What quest would you like to do? (X to quit): ").casefold()
+            status = str(input("What quest would you like to do? (X to quit): ")).casefold()
             if status == "X":
                 print("SALTY FUNGS ONLY!")
                 is_running = False
@@ -128,6 +128,8 @@ while is_running:
             elif status == "!loot":
                 print(treasure)
 
+            else:
+                break
 
     company = 'Guild'
    # company = input("What company are you sailing for?: ").capitalize()
