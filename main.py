@@ -172,7 +172,7 @@ while is_running:
             return t["Corrupted Bounty Skull"] + 3 * t["Mutinous Effigy"]
 
 
-        result = calculate_reward(skelly_reward, status, treasure, emissary_bonus, company, gold_rush)
+        result = calculate_reward.calculate_reward(skelly_reward, status, treasure, emissary_bonus, company, gold_rush)
         if result:
             reward, emi = result
             print(
