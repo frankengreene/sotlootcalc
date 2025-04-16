@@ -1,4 +1,4 @@
-sea of thieves loot calculator (working model is singleloot-broken)
+sea of thieves loot calculator (working model is singleloot-fixed)
 beta 1.2
 
 would like to add:
