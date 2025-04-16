@@ -1,6 +1,7 @@
 import random
 import math
 from datetime import datetime
+import calculate_reward
 #from gi.overrides.keysyms import value #this was added while I was on linux for some reason XD
 
 treasure = {'Treasure Chests': 385, 'Castaway’s Chest': 95, 'Seafarer’s Chest': 200, 'Marauder’s Chest': 400, 'Captain’s Chest': 830, "Coral Castaway's Chest": 166.5,
@@ -110,6 +111,8 @@ while is_running:
         print(commands)
     elif status == "!loot":
         print("\n".join(f"{k}: {v}" for k, v in treasure.items()))
+    elif status == '!quests':
+        print(quests)
     elif status.startswith("!search "):
         query = status[8:].lower()
         matches = [item for item in treasure if query in item.lower()]
@@ -133,19 +136,54 @@ while is_running:
         print("SALTY FUNGS ONLY!")
         is_running = False
         break
+
+
+    elif status == "Fof":
+        def fof_reward(t):
+            return (
+                    t["Chest of Fortune"] +
+                    t["Chest of Legends"] +
+                    2 * t["Keg of Ancient Black Powder"] +
+                    4 * t["Crate of Legendary Voyages"] +
+                    random.randrange(4, 8) * t["Gilded Relic of Ancient Fortune"] +
+                    random.randrange(0, 4) * t["Chalice of Ancient Fortune"] +
+                    random.randrange(1, 3) * t["Villainous Skull of Ancient Fortune"] +
+                    random.randrange(0, 1) * t["Skull of Ancient Fortune"] +
+                    3 * t["Stronghold Chest"] +
+                    2 * t["Crate of Ancient Bone Dust"] +
+                    t["Stronghold Skull"] +
+                    3 * t["Captain’s Chest"] +
+                    sum(t[random.choice(["Crate of Rare Tea", "Crate of Fine Sugar", "Crate of Exotic Silks"])] for _ in
+                        range(3)) +
+                    sum(t[random.choice(["Sapphire Mermaid Gem", 'Emerald Mermaid Gem', 'Ruby Mermaid Gem'])] for _ in
+                        range(5))
+            )
+
+
+        result = calculate_reward.calculate_reward(fof_reward, status, treasure, emissary_bonus, company, gold_rush)
+        if result:
+            reward, emi = result
+            print(
+                f"🦜 Your estimated earning from completing a {status} at Grade {emi} {company} is {reward:.0f} gold!💰")
+            is_running = False
+
+    elif status == "Skelly bounty":
+        def skelly_reward(t):
+            return t["Corrupted Bounty Skull"] + 3 * t["Mutinous Effigy"]
+
+
+        result = calculate_reward(skelly_reward, status, treasure, emissary_bonus, company, gold_rush)
+        if result:
+            reward, emi = result
+            print(
+                f"🦜 Your estimated earning from completing a {status} at Grade {emi} {company} is {reward:.0f} gold!💰")
+            is_running = False
+
     else:
         print("That treasure or command is unknown. Try again.")
 
     if is_running:
         status = input("What quest would you like to do? (X to quit): ")
-
-
-
-
-
-
-
-
 
     # company = input("What company are you sailing for?: ").capitalize()
     #if company not in companies:
