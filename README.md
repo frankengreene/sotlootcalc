@@ -15,7 +15,7 @@ would like to add:
 *fixed:
  - gold rush multiplier for fof
  - add gold rush multiplier to other quests
- - single item value output - being worked on in singleloot-broken branch (because it, and now the program, is broken)
+ - single item value output 
 
 added:
  - !loot, !quests, !search, !value functions
