@@ -7,7 +7,7 @@ would like to add:
 - finding best voyage bang for buck based on time
 - shrouded ghost calculator
 - fine tune random selection for specific loot pools/voyages
-- possibly cluster voyage rewards in lists and call them and have them grab values from corresponding dictionary
+- possibly cluster voyage rewards in lists and when called have them grab values from corresponding dictionary
 - finish quest list
 - finish additional items
 - add emi bonus for value calculations/and gold rush
